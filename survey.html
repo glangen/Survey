@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+    <title>Survey Review</title>
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/dojo/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="http://js.arcgis.com/3.7/js/esri/css/esri.css">
+    <style>
+      html, body { height: 100%; width: 100%; margin: 0; padding: 0; }
+      body       { background-color:#FFF; overflow:hidden; font-family:"Trebuchet MS"; }  
+      #mapDiv    { width:800px; height:600px; border-style:solid; border-width:1px; margin-top:20px; margin-left:20px; }
+      #infoDiv   { width:800px; height:60px; background-color: #9AB; border-style:solid; border-width:1px; margin-top:10px; margin-left:20px; }
+    </style>
+    <script>var dojoConfig = {parseOnLoad: true};</script><script src="http://js.arcgis.com/3.7/"></script>
+    <script>
+      dojo.require("esri.map");
+      var SFMap;
+      function init() {
+        SFMap = new esri.Map("mapDiv",{ basemap: "streets", center: [-122.434, 37.752], zoom: 17, logo: false });
+        dojo.connect(SFMap, "onLoad", function(SFMap) {
+          drawFeatures();
+        }); 
+      }
+      function drawFeatures() {
+        var aLineSymbol = new esri.symbol.SimpleLineSymbol(esri.symbol.SimpleLineSymbol.STYLE_SOLID, new dojo.Color([0,0,0]), 1);
+        var aPointSymbol = new esri.symbol.SimpleMarkerSymbol(); aPointSymbol.setSize(6); aPointSymbol.setColor(new dojo.Color([0,0,0,0.3]));
+        var aLine = new esri.geometry.Polyline([[-122.433731, 37.751751],[-122.433718, 37.751366],[-122.433431, 37.751383],[-122.433442, 37.751768],[-122.433731, 37.751751]]); 
+        SFMap.graphics.add(new esri.Graphic(aLine, aLineSymbol));
+        aLine = new esri.geometry.Polyline([[-122.433628, 37.751758],[-122.433613, 37.751371]]);
+        SFMap.graphics.add(new esri.Graphic(aLine, aLineSymbol));
+        aLine = new esri.geometry.Polyline([[-122.433541, 37.751764],[-122.433526, 37.751379]]);
+        SFMap.graphics.add(new esri.Graphic(aLine, aLineSymbol));
+        var aPoint = new esri.geometry.Point([-122.433731, 37.751751]); 
+        SFMap.graphics.add(new esri.Graphic(aPoint, aPointSymbol));
+        var aPoint = new esri.geometry.Point([-122.433718, 37.751366]); 
+        SFMap.graphics.add(new esri.Graphic(aPoint, aPointSymbol));
+        var aPoint = new esri.geometry.Point([-122.433431, 37.751383]); 
+        SFMap.graphics.add(new esri.Graphic(aPoint, aPointSymbol));
+        var aPoint = new esri.geometry.Point([-122.433442, 37.751768]); 
+        SFMap.graphics.add(new esri.Graphic(aPoint, aPointSymbol));
+      }
+      dojo.ready(init);
+    </script>
+  </head>
+  <body class="claro">
+    <div id="mapDiv" ></div>
+    <div id="infoDiv">&nbsp;&nbsp;Parcel Designators: Lot 1, Lot 2, Lot 3<br>&nbsp;&nbsp;Plan: 1247 San Francisco</div>
+  </body>
+</html>
